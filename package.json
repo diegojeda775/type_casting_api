@@ -2,10 +2,10 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "server.ts",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/server",
+    "dev": "nodemon ./src/server.ts",
     "compile": "tsc",
     "start": "npm run compile && node ./dist/server.js"
   },

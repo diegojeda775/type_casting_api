@@ -8,6 +8,10 @@ const books = [
     title: "City of Glass",
     author: "Paul Auster",
   },
+  {
+    title: "Sin city",
+    author: "Sherrilyn Kenyon",
+  },
 ];
 
 const resolvers = {
