@@ -1,13 +1,15 @@
+import * as dotenv from "dotenv";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
-import dotenv from "dotenv";
 import express from "express";
 import http from "http";
 import cors from "cors";
 import bodyParser from "body-parser";
 import typeDefs from "./graphql/typeDefs.js";
 import resolvers from "./graphql/resolvers.js";
+
+dotenv.config({ path: "./src/config/config.env" });
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -32,6 +34,8 @@ app.use((req, res) => {
 });
 
 await new Promise<void>((resolve) =>
-  httpServer.listen({ port: 5000 }, resolve)
+  httpServer.listen({ port: process.env.PORT }, resolve)
 );
-console.log(`🚀  Server ready at: http://localhost:5000/graphql`);
+console.log(
+  `🚀  Server ready at: http://localhost:${process.env.PORT}/graphql`
+);
