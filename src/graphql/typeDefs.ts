@@ -1,11 +1,17 @@
+//todo update User adding created at and updated at.
 const typeDefs = `
-  type Book {
-    title: String
-    author: String
+  type User {
+    id: String!
+    userName: String!
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
   }
 
   type Query {
-    books: [Book]
+    users: [User]
+    user(id: String!): User
   }
 `;
 

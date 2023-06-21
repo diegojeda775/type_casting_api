@@ -1,22 +1,30 @@
-// import books from "../models/dbFile";
-const books = [
+const users = [
   {
-    title: "The Awakening",
-    author: "Kate Chopin",
+    id: "1",
+    userName: "diegojeda775",
+    firstName: "Diego",
+    lastName: "Ojeda",
+    email: "diegojeda775@yahoo.com",
+    password: "myPassword",
   },
   {
-    title: "City of Glass",
-    author: "Paul Auster",
-  },
-  {
-    title: "Sin city",
-    author: "Sherrilyn Kenyon",
+    id: "2",
+    userName: "ctshane",
+    firstName: "Courtney",
+    lastName: "Shane",
+    email: "ctshane@yahoo.com",
+    password: "myPassword",
   },
 ];
 
 const resolvers = {
   Query: {
-    books: () => books,
+    users: () => users,
+    user: (_: any, args: { id: string }, __: any, ___: any) => {
+      return users.find((u) => {
+        return u.id === args.id;
+      });
+    },
   },
 };
 
