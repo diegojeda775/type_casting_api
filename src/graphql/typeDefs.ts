@@ -1,5 +1,6 @@
 //todo update User adding created at and updated at.
-const typeDefs = `
+import { gql } from "graphql-tag";
+const typeDefs = gql`
   type User {
     id: String!
     userName: String!
@@ -10,8 +11,8 @@ const typeDefs = `
   }
 
   type Query {
-    users: [User]
-    user(id: String!): User
+    users: [User!]
+    user(id: String!): User!
   }
 `;
 

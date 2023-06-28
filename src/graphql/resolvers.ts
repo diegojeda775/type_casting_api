@@ -21,9 +21,7 @@ const resolvers = {
   Query: {
     users: () => users,
     user: (_: any, args: { id: string }, __: any, ___: any) => {
-      return users.find((u) => {
-        return u.id === args.id;
-      });
+      return users.find((u) => u.id === args.id);
     },
   },
 };
