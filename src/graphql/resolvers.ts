@@ -20,7 +20,7 @@ const users = [
 const resolvers = {
   Query: {
     users: () => users,
-    user: (_: any, args: { id: string }, __: any, ___: any) => {
+    user: (_: any, args: any, __: any, ___: any) => {
       return users.find((u) => u.id === args.id);
     },
   },

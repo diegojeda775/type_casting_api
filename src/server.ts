@@ -9,7 +9,7 @@ import bodyParser from "body-parser";
 import typeDefs from "./graphql/typeDefs.js";
 import resolvers from "./graphql/resolvers.js";
 
-dotenv.config({ path: "./src/config/config.env" });
+dotenv.config();
 
 const app = express();
 const httpServer = http.createServer(app);
