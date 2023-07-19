@@ -1,27 +1,46 @@
-const users = [
-  {
-    id: "1",
-    userName: "diegojeda775",
-    firstName: "Diego",
-    lastName: "Ojeda",
-    email: "diegojeda775@yahoo.com",
-    password: "myPassword",
-  },
-  {
-    id: "2",
-    userName: "ctshane",
-    firstName: "Courtney",
-    lastName: "Shane",
-    email: "ctshane@yahoo.com",
-    password: "myPassword",
-  },
-];
+import prisma from "../config/db.js";
+import { GraphQLError } from "graphql";
+
+type UserInput = {
+  userName: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+};
 
 const resolvers = {
   Query: {
-    users: () => users,
-    user: (_: any, args: any, __: any, ___: any) => {
-      return users.find((u) => u.id === args.id);
+    users: async () => await prisma.user.findMany(),
+    user: async (_: unknown, args: { id: string }) => {
+      const user = await prisma.user.findUnique({
+        where: {
+          id: args.id,
+        },
+      });
+      return user;
+    },
+  },
+  Mutation: {
+    createUser: async (_: unknown, args: UserInput) => {
+      try {
+        const user = await prisma.user.create({
+          data: {
+            userName: args.userName,
+            firstName: args.firstName,
+            lastName: args.lastName,
+            email: args.email,
+            password: args.password,
+          },
+        });
+        return user;
+      } catch (error) {
+        throw new GraphQLError("Error creating user", {
+          extensions: {
+            code: "USER_NOT_CREATED",
+          },
+        });
+      }
     },
   },
 };
